@@ -2,48 +2,33 @@ package apcsa.githubtrack;
 
 // Implement your CStringUtil class here
 public class CStringUtil{
-    private static String[] word;
 
-    public CStringUtil(String[] word){
-        this.word = word;
-
-    }
-
-    public static boolean isPalindrome(){
-        // decapitate & remove spaces
+    public static boolean isPalindrome(CString theString){
     
-        int count = 0; // finding length w/o spaces
-        for (int i = 0; i < word.length; i++){
-            if (!(word[i].equals(""))){
-                count++;
-            }
-        }
-
-        String[] temp = new String[count];
-        for (int j = 0; j < word.length; j++){
-            if (!(word[j].equals(""))){
-                temp[j] = word[j];
-            }
-        }
-        int length = (temp.length / 2);
+        String temp2 = theString.toString();
+        
        
-       
-        for (int l = 0; l < length; l++){
-            if (!(temp[l].equals(temp[temp.length - l]))){
-                return false; 
-            }
+        temp2  = temp2.replace(" ", "");
+        temp2 = temp2.toLowerCase();
+    
+        String reverse = "";
+
+        for (int i = temp2.length() - 1; i >=0; i--){
+            reverse += temp2.charAt(i);
 
         }
-
-        return true;
+       if (temp2.equals(reverse)){
+            return true;
+       }
+       else return false;
+       
     }
 
     public static int[] toNumerical(CString str, int offset){
         // cast (int)
         int[] temp = new int[str.length()];
         for (int i = 0; i < str.length(); i++){
-            char charTemp = str.get(0).charAt(0);
-            int tempInt = charTemp;
+            int tempInt = str.charAt(i);
             temp[i] = tempInt + offset; 
 
         }
@@ -71,7 +56,7 @@ public class CStringUtil{
 
                 int count = 0;
                 for (int k = 0; k< str.length; k++){
-                    for (int m = 0; m < temp.length; m++){
+                    for (int m = 0; m < temp.length -1; m++){
                         if (str[k + m] == temp[m]){
                             count++;
                         }
@@ -113,33 +98,13 @@ public class CStringUtil{
         // convert to int arrays
         // sort in increasing order
         // use previous methods
-        int[] temp1 = toNumerical(outer, 0);
-        int[] temp2 = toNumerical(inner, 0);
+
+     
+
+        int[] temp1 = toNumerical(new CString(outer.sortAscending()), 0);
+        int[] temp2 = toNumerical(new CString(inner.sortAscending()), 0);
 
 
-        for (int m = 0; m < temp1.length -1; m++){
-            int minIndex = m;
-            for (int n = m + 1; n < temp1.length; n++){
-                if (temp1[n] < temp1[m]){
-                    minIndex = n;
-                }
-            }
-            int temp = temp1[m];
-            temp1[m] = temp1[minIndex];
-            temp1[minIndex] = temp; 
-        }
-
-        for (int m = 0; m < temp2.length -1; m++){
-            int minIndex = m;
-            for (int n = m + 1; n < temp2.length; n++){
-                if (temp2[n] < temp2[m]){
-                    minIndex = n;
-                }
-            }
-            int temp = temp2[m];
-            temp2[m] = temp2[minIndex];
-            temp2[minIndex] = temp; 
-        }
         
         for (int i = 0; i < temp2.length; i++){
             int count = 0;
@@ -151,7 +116,6 @@ public class CStringUtil{
             if (!(count > 0)){
                 return false;
             }
-
         }
         return true;
 
@@ -160,19 +124,56 @@ public class CStringUtil{
     }
 
     public static CString decrypt(CString str){
-        // analyze numerical representation (call method)
-        //
-        // count # of clumps
-        // shift ASCII values backwards ?? (by num of clumps)
-        // sequence reversed ?? 
+       
+        int[] list = toNumerical(str, 0);
         int length = str.length();
-        CString temp = str;
+        
+       // CString temp2 = str;
+       
+        int clumpCount = 0;
+        int count = 1;
 
-        for (int i = 0; i < length; i++){
-            temp.set(i, str.get(length-i));
+        for (int j = 1; j < list.length; j++){
+            if (list[j] == list[j-1]){
+                count++;
+            }
+            else{
+                if (count >= 2){
+                    clumpCount++;
+                }
+                count = 1; 
+            }
+
+        }
+        if (count >= 2){
+            clumpCount++;
         }
 
-        return temp;
+        // shift backwards
+        for (int k = 0; k < list.length; k++){
+            list[k] -= clumpCount;
+        }
+        
+        // reverse
+        int[] tempList = new int[list.length];
+        for (int l = list.length -1; l >= 0; l--){
+            tempList[l] = list[list.length - l];
+        }
+        /* 
+        for (int i = 0; i < length; i++){
+            temp.set(i, (char)(str.charAt(i) - clumpCount));
+        } */
+
+        String tempString = "";
+        for (int i = 0; i < length; i++){
+            tempString += (char) tempList[i];
+            // temp2.set(i, (char) tempList[i]);
+        }
+        CString newResult = new CString(tempString);
+
+        return newResult;
+
+
     }
 
 

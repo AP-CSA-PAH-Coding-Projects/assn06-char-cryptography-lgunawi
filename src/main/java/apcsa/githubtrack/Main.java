@@ -3,7 +3,6 @@ package apcsa.githubtrack;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -23,14 +22,56 @@ public class Main {
         }
         scan.close(); 
 
+        for (int i = 0; i < list.size(); i ++){
+            list.set(i, CStringUtil.decrypt(list.get(i)));
+        }
+        // rotate message
+        // arraylist to array ?!?! 
+        
+
+        // find largest ASCII value. -60; --> d
+        // use nested for loop
+        // print to console
+
+        int max = 0;
+        for (int i = 0; i < list.size(); i++){
+            for (int j = 0; j < list.get(i).length(); j++){
+                if (list.get(i).charAt(j) > max){
+                    max = list.get(i).charAt(j);
+                }
+            }
+        }
+        max -= 60;
+        int d = max;
+
+        CString[] temp = new CString[list.size()];
+        for (int k = 0; k < list.size(); k++){
+            temp[k] = (list.get(k));
+        }
+        rotate(temp, d);
+
+
+
 
 
 
         
     }
 
-    public static void rotate(CString[] arr, int d){
+    public static CString[] rotate(CString[] arr, int d){
+
+        for (int j = 0; j < d; j++){
+            CString temp2 = arr[0];
+            for (int i = 1; i < arr.length; i++){
+                arr[i-1] = arr[i];
+
+            }
+            arr[arr.length-1] = temp2;
+        }
+        return arr;
         
+        
+
     }
 
 
