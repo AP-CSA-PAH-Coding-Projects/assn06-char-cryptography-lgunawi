@@ -14,11 +14,12 @@ public class Main {
         File myFile = new File("secretMessage.txt");
         Scanner scan = new Scanner(myFile);
 
-        int m = 0;
+       // int m = 0;
         while (scan.hasNext()){
             String word = scan.next();
-            list.set(m, new CString(word));
-            m++;
+            list.add(new CString(word));
+            System.out.println(list.size());
+           // m++;
         }
         scan.close(); 
 
