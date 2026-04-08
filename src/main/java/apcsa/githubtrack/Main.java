@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<CString> list = new ArrayList<CString>();
                 
-        File myFile = new File("secretMessage.txt");
+        File myFile = new File("src/main/resources/secretMessage.txt");
         Scanner scan = new Scanner(myFile);
 
        // int m = 0;
