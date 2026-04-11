@@ -39,7 +39,7 @@ public class CStringUtil{
         // convert to int first
 
         int[] temp = toNumerical(str, 0);
-        return maxMirror(temp);
+        return (maxMirror(temp) /2);
 
     }
 
@@ -47,23 +47,23 @@ public class CStringUtil{
         // convert to int first
 
         int max = 0;
-        for (int i = 0; i < str.length; i++){
+        int arrLength = str.length;
+        for (int i = 0; i < arrLength; i++){
             
-            int[] temp;
-            for (int j = 0; j < i; j++){
-                temp = new int[i];
-                temp[j] = str[i -j];
-
-                int count = 0;
-                for (int k = 0; k< str.length; k++){
-                    for (int m = 0; m < temp.length -1; m++){
-                        if (str[k + m] == temp[m]){
-                            count++;
-                        }
-                    }
+         
+            for (int j = arrLength - 1; j >= 0; j--){
+                int n = i;
+                int m = j; 
+                int maxLength = 0;
+                
+                while ((n < arrLength && m >= 0) && str[n] == str[m]){
+                    maxLength++;
+                    n++;
+                    m--;
                 }
-                if (count > max){
-                    max = count;
+                
+                if (maxLength > max){
+                    max = maxLength;
                 }    
 
             }
@@ -74,7 +74,10 @@ public class CStringUtil{
     }
 
     public static int[] memeifyArray(int[] nums){
-        int[] temp = nums;
+        int[] temp = new int[nums.length];
+    
+        
+        
         for (int i = 0; i < nums.length; i++){
             if (nums[i] == 6){
                 temp[i+1] = 7;
@@ -87,10 +90,10 @@ public class CStringUtil{
                     }
                 }
             }
-        }
+        } 
             
         
-        return temp;
+       return temp;
 
     }
 
@@ -103,21 +106,19 @@ public class CStringUtil{
 
         int[] temp1 = toNumerical(new CString(outer.sortAscending()), 0);
         int[] temp2 = toNumerical(new CString(inner.sortAscending()), 0);
+        int i= 0;
+        int j=0; 
 
-
-        
-        for (int i = 0; i < temp2.length; i++){
-            int count = 0;
-            for (int j = 0; j < temp1.length && count <=1; j++){
-                if (temp1[i] == temp2[j]){
-                    count++;
-                }
+        while (i < temp1.length && j < temp2.length){
+            if (temp1[i] == temp2[j]){
+                    j++;
             }
-            if (!(count > 0)){
-                return false;
-            }
+            i++;
         }
-        return true;
+
+    
+    //    boolean temp = (j == temp2.length);
+        return j == temp2.length;
 
 
 
@@ -157,7 +158,7 @@ public class CStringUtil{
         // reverse
         int[] tempList = new int[list.length];
         for (int l = list.length -1; l >= 0; l--){
-            tempList[l] = list[list.length - l];
+            tempList[l] = list[list.length - l -1];
         }
         /* 
         for (int i = 0; i < length; i++){
