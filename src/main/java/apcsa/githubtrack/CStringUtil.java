@@ -1,5 +1,7 @@
 package apcsa.githubtrack;
 
+import java.util.ArrayList;
+
 // Implement your CStringUtil class here
 public class CStringUtil{
 
@@ -39,7 +41,14 @@ public class CStringUtil{
         // convert to int first
 
         int[] temp = toNumerical(str, 0);
-        return (maxMirror(temp) /2);
+
+        return (maxMirror(temp));
+        /*
+        int temp2 = maxMirror(temp);
+        if (temp2 % 2 == 0)
+            return (maxMirror(temp) /2 );
+        else
+            return ((maxMirror(temp) /2 )+1 ); */
 
     }
 
@@ -74,26 +83,39 @@ public class CStringUtil{
     }
 
     public static int[] memeifyArray(int[] nums){
-        int[] temp = new int[nums.length];
-    
-        
-        
-        for (int i = 0; i < nums.length; i++){
-            if (nums[i] == 6){
-                temp[i+1] = 7;
+        ArrayList<Integer> six = new ArrayList<>();
+        ArrayList<Integer> tempOther = new ArrayList<>();
 
-                int count = 0;
-                for (int j = 0; j < nums.length && count <= 1; j++){
-                    if (nums[j] == 7){
-                        temp[j] = nums[i+1];
-                        count++;
-                    }
-                }
-            }
-        } 
+        for(int i = 0; i < nums.length; i++){
+            if (nums[i] == 6){
+                six.add(nums[i]);
             
+            } 
+            else if (nums[i] != 7){
+                tempOther.add(nums[i]);
+            
+            }
+        }
+
+        int[] tempFinal = new int[nums.length];
+        int index = 0; 
+
+        for (int j = 0; j < nums.length; j++){
+            if (nums[j] == 6){
+                tempFinal[index++] = 6;
+                tempFinal[index++] = 7;
+            }
+        }
+
+        int index2 = 0;
+        for (int k = 0; k < tempFinal.length; k++){
+            if (tempFinal[k] == 0){
+                tempFinal[k] = tempOther.get(index2++);
+            }
+        }
+        System.out.println(tempFinal);
+        return tempFinal;
         
-       return temp;
 
     }
 
