@@ -33,7 +33,7 @@ public class CStringUtil{
             int tempInt = str.charAt(i);
             temp[i] = tempInt + offset; 
 
-        }
+        } 
         return temp;
     }
 
