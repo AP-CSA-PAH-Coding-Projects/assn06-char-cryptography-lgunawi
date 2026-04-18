@@ -1,0 +1,5 @@
+This program decrypts a message from a file, by using methods created in the CString and CStringUtil class. The methods have different goals and purposes, and decrypt in different ways or rearrange the CStrings in different ways. For example, sorting by ascending order, reversing, checking for palindromes, mirroring, and certain number orders. 
+
+For this program, I created arrays of characters based on a certain String of a word. The word was split up into the characters and stored in the array. Thus, since the word is split up, the characters can be rearranged with the methods. 
+
+I had trouble with the maxMirror and memeify method, as trying to map out the placement of each character (or ASCII numbers) was difficult. For some methods, I also had to translate between the characters and the numbers. 

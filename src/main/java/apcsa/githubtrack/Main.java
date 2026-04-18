@@ -26,13 +26,7 @@ public class Main {
         for (int i = 0; i < list.size(); i ++){
             list.set(i, CStringUtil.decrypt(list.get(i)));
         }
-        // rotate message
-        // arraylist to array ?!?! 
-        
-
-        // find largest ASCII value. -60; --> d
-        // use nested for loop
-        // print to console
+       
 
         int max = 0;
         for (int i = 0; i < list.size(); i++){

@@ -38,17 +38,11 @@ public class CStringUtil{
     }
 
     public static int maxMirror(CString str){
-        // convert to int first
 
         int[] temp = toNumerical(str, 0);
 
         return (maxMirror(temp));
-        /*
-        int temp2 = maxMirror(temp);
-        if (temp2 % 2 == 0)
-            return (maxMirror(temp) /2 );
-        else
-            return ((maxMirror(temp) /2 )+1 ); */
+        
 
     }
 
@@ -83,36 +77,23 @@ public class CStringUtil{
     }
 
     public static int[] memeifyArray(int[] nums){
-        ArrayList<Integer> six = new ArrayList<>();
-        ArrayList<Integer> tempOther = new ArrayList<>();
-
-        for(int i = 0; i < nums.length; i++){
-            if (nums[i] == 6){
-                six.add(nums[i]);
-            
-            } 
-            else if (nums[i] != 7){
-                tempOther.add(nums[i]);
-            
-            }
-        }
+      
 
         int[] tempFinal = new int[nums.length];
         int index = 0; 
-
         for (int j = 0; j < nums.length; j++){
-            if (nums[j] == 6){
+
+            
+            if (nums[index] != 6 && nums[index] != 7){
+                tempFinal[index] = nums[index];
+            } 
+            
+            else if (nums[j] == 6){
                 tempFinal[index++] = 6;
                 tempFinal[index++] = 7;
             }
         }
-
-        int index2 = 0;
-        for (int k = 0; k < tempFinal.length; k++){
-            if (tempFinal[k] == 0){
-                tempFinal[k] = tempOther.get(index2++);
-            }
-        }
+        
         System.out.println(tempFinal);
         return tempFinal;
         
@@ -123,8 +104,6 @@ public class CStringUtil{
         // convert to int arrays
         // sort in increasing order
         // use previous methods
-
-     
 
         int[] temp1 = toNumerical(new CString(outer.sortAscending()), 0);
         int[] temp2 = toNumerical(new CString(inner.sortAscending()), 0);
@@ -138,11 +117,8 @@ public class CStringUtil{
             i++;
         }
 
-    
-    //    boolean temp = (j == temp2.length);
+   
         return j == temp2.length;
-
-
 
     }
 
@@ -182,15 +158,12 @@ public class CStringUtil{
         for (int l = list.length -1; l >= 0; l--){
             tempList[l] = list[list.length - l -1];
         }
-        /* 
-        for (int i = 0; i < length; i++){
-            temp.set(i, (char)(str.charAt(i) - clumpCount));
-        } */
+        
 
         String tempString = "";
         for (int i = 0; i < length; i++){
             tempString += (char) tempList[i];
-            // temp2.set(i, (char) tempList[i]);
+            
         }
         CString newResult = new CString(tempString);
 
